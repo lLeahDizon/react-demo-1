@@ -14,14 +14,18 @@ class App extends React.PureComponent {
   }
 
   render() {
-    console.log('render 了一次')
-    return (
-      <div>App
-        <div>{this.state.n}
-          <button onClick={this.onClick}>+1</button>
+    const x = (
+      <>
+        <div>hi</div>
+        <div>App
+          <div>{this.state.n}
+            <button onClick={this.onClick}>+1</button>
+          </div>
         </div>
-      </div>
+      </>
     )
+    console.log(x) // 虚拟DOM
+    return x
   }
 }
 
