@@ -1,6 +1,6 @@
 import React from 'react'
 
-class App extends React.Component {
+class App extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = {
@@ -11,10 +11,6 @@ class App extends React.Component {
   onClick = () => {
     this.setState(state => ({n: state.n + 1}))
     this.setState(state => ({n: state.n - 1}))
-  }
-
-  shouldComponentUpdate(newProps, newState) {
-    return newState.n !== this.state.n
   }
 
   render() {
