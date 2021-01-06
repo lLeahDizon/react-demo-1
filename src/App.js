@@ -1,32 +1,21 @@
 import React, {useState, useEffect} from 'react'
+import useUpdate from './useUpdate'
 
 const App = props => {
-  const [childVisible, setChildVisible] = useState(true)
-  const show = () => {
-    setChildVisible(!childVisible)
+  const [n, setN] = useState(0)
+  const onClick = () => {
+    setN(n + 1)
   }
+
+  useUpdate(() => {
+    console.log('n 变了')
+  }, n)
 
   return (
     <div>
-      <button onClick={show}>{childVisible ? 'hide' : 'show'}</button>
-      {childVisible ? <Child/> : null}
+      {n}
+      <button onClick={onClick}>+1</button>
     </div>
-  )
-}
-
-const Child = (props) => {
-  // 模拟 componentWillUnMount
-  useEffect(() => {
-    // 函数本身是在渲染的时候执行的
-    // 函数的返回是在销毁的时候执行的
-    console.log('渲染或者变化')
-    return () => {
-      console.log('Child 销毁了')
-    }
-  })
-
-  return (
-    <div>Child</div>
   )
 }
 
