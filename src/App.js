@@ -4,28 +4,25 @@ class App extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = {
-      n: 1
+      n: 1,
+      width: undefined
     }
   }
 
   onClick = () => {
     this.setState(state => ({n: state.n + 1}))
-    this.setState(state => ({n: state.n - 1}))
+  }
+
+  componentDidMount() {
+    const div = document.getElementById('xxx')
+    const {width} = div.getBoundingClientRect()
+    this.setState({width})
   }
 
   render() {
-    const x = (
-      <>
-        <div>hi</div>
-        <div>App
-          <div>{this.state.n}
-            <button onClick={this.onClick}>+1</button>
-          </div>
-        </div>
-      </>
+    return (
+      <div id="xxx">Hello World, {this.state.width}</div>
     )
-    console.log(x) // 虚拟DOM
-    return x
   }
 }
 
