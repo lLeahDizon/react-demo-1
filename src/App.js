@@ -1,8 +1,27 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
+import ReactDOM from 'react-dom'
 import useUpdate from './useUpdate'
 
+let _state
+const useMyState = (initialValue) => {
+  console.log('useMyState run')
+  _state = _state === undefined ? initialValue : _state
+  const setState = (newValue) => {
+    _state = newValue
+    render()
+  }
+  return [_state, setState]
+}
+
+const render = () => {
+  ReactDOM.render(<App/>, document.getElementById('root'))
+}
+
 const App = props => {
-  const [n, setN] = useState(0)
+  console.log('App 运行了')
+  const [n, setN] = useMyState(0)
+  console.log(n)
+
   const onClick = () => {
     setN(n + 1)
   }
