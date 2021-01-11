@@ -1,39 +1,34 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import useUpdate from './useUpdate'
 
-let _state
+let _state = []
+let index = 0
 const useMyState = (initialValue) => {
-  console.log('useMyState run')
-  _state = _state === undefined ? initialValue : _state
+  let currentIndex = index
+  _state[currentIndex] = _state[currentIndex] === undefined ? initialValue : _state[currentIndex]
   const setState = (newValue) => {
-    _state = newValue
+    _state[currentIndex] = newValue
     render()
   }
-  return [_state, setState]
+  index += 1
+  return [_state[currentIndex], setState]
 }
 
 const render = () => {
+  index = 0
   ReactDOM.render(<App/>, document.getElementById('root'))
 }
 
-const App = props => {
-  console.log('App 运行了')
+const App = () => {
   const [n, setN] = useMyState(0)
-  console.log(n)
-
-  const onClick = () => {
-    setN(n + 1)
-  }
-
-  useUpdate(() => {
-    console.log('n 变了')
-  }, n)
+  const [m, setM] = useMyState(0)
 
   return (
     <div>
-      {n}
-      <button onClick={onClick}>+1</button>
+      <p>{n}</p>
+      <button onClick={() => setN(n + 1)}>+1</button>
+      <p>{m}</p>
+      <button onClick={() => setM(m + 1)}>+1</button>
     </div>
   )
 }
