@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import './styles.css'
 
 let _state = []
 let index = 0
@@ -19,21 +20,40 @@ const render = () => {
   ReactDOM.render(<App/>, document.getElementById('root'))
 }
 
+const themeContext = React.createContext(null)
+
 const App = () => {
-  const nRef = React.useRef(0)// {current: 0}
-  const log = () => setTimeout(() => console.log(`n: ${nRef.current}`), 1000)
-  const update = React.useState(null)[1]
+  const [theme, setTheme] = React.useState('red')
 
   return (
+    <themeContext.Provider value={{theme, setTheme}}>
+      <div className={`App ${theme}`}>
+        <p>{theme}</p>
+        <div>
+          <ChildA/>
+        </div>
+        <div>
+          <ChildB/>
+        </div>
+      </div>
+    </themeContext.Provider>
+  )
+}
+
+function ChildA() {
+  const {setTheme} = React.useContext(themeContext)
+  return (
     <div>
-      <p>{nRef.current} 这里并不能实时更新</p>
-      <button onClick={() => {
-        nRef.current += 1
-        update(nRef.current)
-      }}>
-        +1
-      </button>
-      <button onClick={log}>log</button>
+      <button onClick={() => setTheme('red')}>red</button>
+    </div>
+  )
+}
+
+function ChildB() {
+  const {setTheme} = React.useContext(themeContext)
+  return (
+    <div>
+      <button onClick={() => setTheme('blue')}>blue</button>
     </div>
   )
 }
