@@ -20,15 +20,20 @@ const render = () => {
 }
 
 const App = () => {
-  const [n, setN] = useMyState(0)
-  const [m, setM] = useMyState(0)
+  const nRef = React.useRef(0)// {current: 0}
+  const log = () => setTimeout(() => console.log(`n: ${nRef.current}`), 1000)
+  const update = React.useState(null)[1]
 
   return (
     <div>
-      <p>{n}</p>
-      <button onClick={() => setN(n + 1)}>+1</button>
-      <p>{m}</p>
-      <button onClick={() => setM(m + 1)}>+1</button>
+      <p>{nRef.current} 这里并不能实时更新</p>
+      <button onClick={() => {
+        nRef.current += 1
+        update(nRef.current)
+      }}>
+        +1
+      </button>
+      <button onClick={log}>log</button>
     </div>
   )
 }
