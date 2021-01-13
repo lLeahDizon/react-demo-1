@@ -1,35 +1,39 @@
-import React, {useState, useReducer} from 'react'
+import React, {useReducer} from 'react'
+import User from './components/user'
+import Context from './Context'
+import Books from './components/books'
+import Movies from './components/movies'
+import userReducer from './reducers/user_reducer'
+import booksReducer from './reducers/books_reducer'
+import moviesReducer from './reducers/movies_reducer'
 
-const initial = {
-  n: 0
+const store = {
+  user: null,
+  books: null,
+  movies: null,
+}
+
+const obj = {
+  ...userReducer,
+  ...booksReducer,
+  ...moviesReducer
 }
 
 const reducer = (state, action) => {
-  if (action.type === 'add') {
-    return {n: state.n + action.number}
-  } else if (action.type === 'multi') {
-    return {n: state.n * 2}
-  } else {
-    throw new Error('unknown type')
-  }
+  const fn = obj[action.type]
+  if (fn) {return fn(state, action)} else {throw new Error()}
 }
 
 function ReducerDemo() {
-  const [state, dispatch] = useReducer(reducer, initial)
-  const {n} = state
-  const onClick = () => {
-    dispatch({type: 'add', number: 1})
-  }
-  const onClick2 = () => {
-    dispatch({type: 'add', number: 2})
-  }
+  const [state, dispatch] = useReducer(reducer, store)
 
   return (
-    <div className='App'>
-      <h1>n: {n}</h1>
-      <button onClick={onClick}>+1</button>
-      <button onClick={onClick2}>+2</button>
-    </div>
+    <Context.Provider value={{state, dispatch}}>
+      <User/>
+      <hr/>
+      <Books/>
+      <Movies/>
+    </Context.Provider>
   )
 }
 
