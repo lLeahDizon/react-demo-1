@@ -15,8 +15,9 @@ function App() {
 }
 
 function Baba() {
+  const {n, setN} = useContext(C)
   return (
-    <div>我是爸爸<Child/></div>
+    <div>我是爸爸 n: {n}<Child/></div>
   )
 }
 
