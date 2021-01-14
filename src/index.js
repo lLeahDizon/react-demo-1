@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import App from './App.js'
 import ReducerDemo from './ReducerDemo.js'
 import ContextDemo from './ContextDemo'
-import EffectDemo from './EffectDemo'
+// import EffectDemo from './EffectDemo'
+import LayoutEffectDemo from './LayoutEffectDemo'
 
-ReactDOM.render(<EffectDemo/>, document.getElementById('root'))
+ReactDOM.render(<LayoutEffectDemo/>, document.getElementById('root'))
