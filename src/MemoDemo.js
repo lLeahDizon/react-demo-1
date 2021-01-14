@@ -1,4 +1,4 @@
-import React, {useState, memo, useMemo} from 'react'
+import React, {useState, memo, useMemo, useCallback} from 'react'
 
 function App() {
   console.log('App 执行了')
@@ -13,10 +13,15 @@ function App() {
   // const onClickChild = () => {} // 这一句话重新执行
 
   // useMemo 用来缓存一些，两次新旧组件迭代的时候，希望用上一次的值的函数
-  const onClickChild = useMemo(() => {
-    return () => {
-      console.log(m)
-    }
+  // const onClickChild = useMemo(() => {
+  //   return () => {
+  //     console.log(m)
+  //   }
+  // }, [m])
+
+  // 使用 useCallback 代替 useMemo 中的返回函数的函数
+  const onClickChild = useCallback(() => {
+    console.log(m)
   }, [m])
 
   return (
