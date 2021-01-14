@@ -22,6 +22,15 @@ function App() {
     console.log('任何一个 state 变化都执行')
   })
 
+  useEffect(() => {
+    const id = setInterval(() => {
+      console.log('hi')
+    }, 1000)
+    return () => {
+      window.clearInterval(id)
+    }
+  }, [])
+
   return (
     <div>
       n: {n}
