@@ -5,5 +5,6 @@ import ReducerDemo from './ReducerDemo.js'
 import ContextDemo from './ContextDemo'
 // import EffectDemo from './EffectDemo'
 import LayoutEffectDemo from './LayoutEffectDemo'
+import MemoDemo from './MemoDemo'
 
-ReactDOM.render(<LayoutEffectDemo/>, document.getElementById('root'))
+ReactDOM.render(<MemoDemo/>, document.getElementById('root'))
