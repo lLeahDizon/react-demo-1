@@ -1,6 +1,7 @@
-import React, {useState, memo} from 'react'
+import React, {useState, memo, useMemo} from 'react'
 
 function App() {
+  console.log('App 执行了')
   const [n, setN] = useState(0)
   const [m, setM] = useState(0)
   const onClick = () => {
@@ -9,6 +10,14 @@ function App() {
   const onClick2 = () => {
     setM(i => i + 1)
   }
+  // const onClickChild = () => {} // 这一句话重新执行
+
+  // useMemo 用来缓存一些，两次新旧组件迭代的时候，希望用上一次的值的函数
+  const onClickChild = useMemo(() => {
+    return () => {
+      console.log(m)
+    }
+  }, [m])
 
   return (
     <div className='App'>
@@ -16,7 +25,7 @@ function App() {
         <button onClick={onClick}>update n {n}</button>
         <button onClick={onClick2}>update m {m}</button>
       </div>
-      <Child data={m}/>
+      <Child data={m} onClick={onClickChild}/>
       {/*<Child2 data={m}/>*/}
     </div>
   )
@@ -27,7 +36,7 @@ const Child = memo((props) => {
   console.log('child 执行了')
   console.log('假设这里有大量代码')
   return (
-    <div>child: {props.data}</div>
+    <div onClick={props.onClick}>child: {props.data}</div>
   )
 })
 
