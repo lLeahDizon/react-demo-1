@@ -7,5 +7,6 @@ import ContextDemo from './ContextDemo'
 import LayoutEffectDemo from './LayoutEffectDemo'
 import MemoDemo from './MemoDemo'
 import RefDemo from './RefDemo'
+import ForwardRefDemo from './ForwardRefDemo'
 
-ReactDOM.render(<RefDemo/>, document.getElementById('root'))
+ReactDOM.render(<ForwardRefDemo/>, document.getElementById('root'))
