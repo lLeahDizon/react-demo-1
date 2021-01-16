@@ -8,5 +8,6 @@ import LayoutEffectDemo from './LayoutEffectDemo'
 import MemoDemo from './MemoDemo'
 import RefDemo from './RefDemo'
 import ForwardRefDemo from './ForwardRefDemo'
+import MoveDemo from './MoveDemo'
 
-ReactDOM.render(<ForwardRefDemo/>, document.getElementById('root'))
+ReactDOM.render(<MoveDemo/>, document.getElementById('root'))
