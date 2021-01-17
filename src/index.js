@@ -9,5 +9,6 @@ import MemoDemo from './MemoDemo'
 import RefDemo from './RefDemo'
 import ForwardRefDemo from './ForwardRefDemo'
 import MoveDemo from './MoveDemo'
+import CustomizeDemo from './CustomizeDemo'
 
-ReactDOM.render(<MoveDemo/>, document.getElementById('root'))
+ReactDOM.render(<CustomizeDemo/>, document.getElementById('root'))
